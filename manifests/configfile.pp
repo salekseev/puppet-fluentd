@@ -9,21 +9,6 @@ define fluentd::configfile(
   $conf_path     = "/etc/td-agent/config.d/${conf_name}"
   $wildcard_path = "/etc/td-agent/config.d/*-${base_name}"
 
-  # clean up in case of a priority change
-  #exec { "rm ${wildcard_path}":
-  #  onlyif => "test \$(ls ${wildcard_path} | grep -v ${conf_name} | wc -l) -gt 0",
-  #  path   => [
-  #    '/bin',
-  #    '/sbin',
-  #    '/usr/bin',
-  #    '/usr/sbin',
-  #    '/usr/local/bin',
-  #    '/usr/local/sbin'
-  #  ],
-  #  before => File[$conf_path],
-  #  notify => Class['fluentd::service'],
-  #}
-
   if $ensure == 'absent' {
     file { $conf_path:
       ensure  => $ensure,
