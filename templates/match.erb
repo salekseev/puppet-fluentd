@@ -3,7 +3,7 @@
   type copy
   <%- @config.each do |config| -%>
   <store>
-    <%- config.each do |key, val| -%>
+    <%- config.sort_by{|key,val|key}.each do |key, val| -%>
       <%- if key == 'servers' -%>
         <%- val.each do |server| -%>
         <server>
@@ -19,7 +19,7 @@
   </store>
   <%- end -%>
 <%- else -%>
-  <%- @config.each do |key, val| -%>
+  <%- @config.sort_by{|key,val|key}.each do |key, val| -%>
     <%- if key == 'servers' -%>
       <%- val.each do |server| -%>
       <server>
