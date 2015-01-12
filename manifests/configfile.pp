@@ -10,8 +10,8 @@ define fluentd::configfile(
   $wildcard_path = "/etc/td-agent/config.d/*-${base_name}"
 
   # clean up in case of a priority change
-  exec { "rm ${wildcard_path}":
-    onlyif => "test \$(ls ${wildcard_path} | grep -v ${conf_name} | wc -l) -gt 0",
+  exec { "/bin/rm ${wildcard_path}":
+    onlyif => "/usr/bin/test \$(/bin/ls ${wildcard_path} | /usr/bin/grep -v ${conf_name} | /usr/bin/wc -l) -gt 0",
     before => File[$conf_path],
     notify => Class['fluentd::service'],
   }
