@@ -7,7 +7,7 @@
       <%- if key == 'servers' -%>
         <%- val.each do |server| -%>
         <server>
-          <%- server.each do |k,v| -%>
+          <%- server.sort_by{|k,v|k}.each do |k,v| -%>
           <%= k %> <%= v %>
           <%- end -%>
         </server>
@@ -23,7 +23,7 @@
     <%- if key == 'servers' -%>
       <%- val.each do |server| -%>
       <server>
-        <%- server.each do |k,v| -%>
+        <%- server.sort_by{|k,v|k}.each do |k,v| -%>
         <%= k %> <%= v %>
         <%- end -%>
       </server>
