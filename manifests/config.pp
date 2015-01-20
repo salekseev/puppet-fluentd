@@ -1,26 +1,25 @@
 # Class: fluentd::config()
 #
 #
-class fluentd::config (
-  $purge_config = $fluentd::purge_config,
-  $purge_ignore = $fluentd::purge_ignore,
-
-) {
-    file { '/etc/td-agent/td-agent.conf' :
+class fluentd::config ( $config_vers = $fluentd::config_vers ) {
+    file { 'fluentd_config_name':
         ensure  => 'file',
-        owner   => 'root',
-        group   => 'root',
-        content => template('fluentd/td-agent.conf.erb'),
+        path    => $fluentd::config_name,
+        owner   => $fluentd::daemon_user,
+        group   => $fluentd::daemon_group,
+        mode    => '0640',
+        content => template('fluentd/fluentd.conf.erb'),
         notify  => Class['fluentd::service'],
     }
 
-    file {'/etc/td-agent/config.d':
+    file { 'fluentd_config_dir':
         ensure  => 'directory',
-        owner   => 'td-agent',
-        group   => 'td-agent',
+        path    => $fluentd::config_dir,
+        owner   => $fluentd::daemon_user,
+        group   => $fluentd::daemon_group,
         mode    => '0750',
-        recurse => $purge_config,
-        purge   => $purge_config,
-        ignore  => $purge_ignore,
+        recurse => $fluentd::purge_config,
+        purge   => $fluentd::purge_config,
+        ignore  => $fluentd::purge_ignore,
     }
 }

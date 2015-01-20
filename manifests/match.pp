@@ -1,9 +1,9 @@
 # == definition fluentd::match
 define fluentd::match (
+  $pattern,
   $ensure   = present,
   $config   = {},
   $priority = 50,
-  $pattern,
 ) {
   fluentd::configfile { "match-${name}":
     ensure   => $ensure,

@@ -1,11 +1,11 @@
 # == definition fluentd::match
 define fluentd::filter (
+  $pattern,
   $ensure   = present,
   $config   = {
-    'type'     => 'grep',
+    'type' => 'grep',
   },
   $priority = 50,
-  $pattern,
 ) {
 
   if ($config['type'] == 'grep') {

@@ -1,9 +1,9 @@
 ##apt.pp
 
-# Class: fluentd::install_repo::apt ()
+# Class: fluentd::manage_repo::apt ()
 #
 #
-class fluentd::install_repo::apt () {
+class fluentd::manage_repo::apt () {
 
     apt::source { 'treasure-data':
         location    => "http://packages.treasuredata.com/debian",
